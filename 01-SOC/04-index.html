@@ -28,7 +28,21 @@
 		//state & behavior of a calculator
 		function SalaryCalculatorModel(){
 			//state
-			this.basic = 0;
+			//this.basic = 0;
+			this.onBasicChange = null;
+			var _basic = 0;
+
+			this.getBasic = function(){
+				return _basic;
+			};
+
+			this.setBasic = function(value){
+				if (_basic === value) return;
+				_basic = value;
+				if (typeof this.onBasicChange === 'function')
+					this.onBasicChange();
+			};
+
 			this.hra = 0;
 			this.da = 0;
 			this.tax = 0;
@@ -37,7 +51,7 @@
 			this.onSalaryChange = null;
 		}
 		SalaryCalculatorModel.prototype.calculate = function() {
-			var gross = this.basic + this.hra + this.da;
+			var gross = this.getBasic() + this.hra + this.da;
 			var net = gross * ((100-this.tax)/100);
 			this.salary = net;
 			if (typeof this.onSalaryChange === 'function')
@@ -46,11 +60,11 @@
 
 		//UI
 		$(function(){
-			
+
 			window['model'] = new SalaryCalculatorModel();
 
 			$('#txtBasic').change(function(){
-				model.basic = $(this).val().toInt();
+				model.setBasic($(this).val().toInt());
 			});
 
 			$('#txtHra').change(function(){
@@ -72,6 +86,10 @@
 
 			model.onSalaryChange = function(){
 				$('#tdSalary').html(model.salary);
+			};
+
+			model.onBasicChange = function(){
+				$('#tdBasic').html(model.getBasic());
 			};
 		});
 	</script>
@@ -103,6 +121,10 @@
 			<table>
 				<tbody>
 					<tr>
+						<td id="tdBasic">[Basic]</td>
+						<td id="tdHra">[HRA]</td>
+						<td id="tdDa">[DA]</td>
+						<td id="tdTax">[Tax]</td>
 						<td id="tdSalary">[Salary]</td>
 					</tr>
 				</tbody>
