@@ -77,6 +77,7 @@
 
 		function SalaryCalculator(model){
 
+			//presentation
 			var _template = `
 				<section>
 					<div class="field">
@@ -136,12 +137,12 @@
 			$viewEle.on('change','#rangeTax',function(){
 				model.set('tax', $(this).val().toInt());
 			});
-
-			//Reacting to model changes
+			
 			$viewEle.on('click','#btnCalculate',function(){
 				model.calculate();	
 			});
 
+			//Reacting to model changes
 			model.onChange('salary', function(){
 				$('#tdSalary', $viewEle).html(model.get('salary'));
 			});
