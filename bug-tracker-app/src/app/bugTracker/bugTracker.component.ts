@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
+import { Bug } from './models/Bug';
+
 @Component({
 	selector : 'app-bug-tracker',
 	templateUrl : 'bugTracker.component.html',
@@ -7,9 +9,17 @@ import { Component, ViewEncapsulation } from '@angular/core';
 	encapsulation : ViewEncapsulation.None
 })
 export class BugTrackerComponent{
-	bugs : string[] = [];
+	bugs : Bug[] = [];
 
 	onAddNewClick(bugName : string){
-		this.bugs.push(bugName);
+		let newBug : Bug = {
+			name : bugName,
+			isClosed : false
+		};
+		this.bugs.push(newBug);
+	}
+
+	onBugNameClick(bug : Bug){
+		bug.isClosed = !bug.isClosed;
 	}
 }
