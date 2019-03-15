@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GreeterComponent } from './greeter/greeter.component';
 import { SalaryCalculatorComponent } from './salaryCalculator/salaryCalculator.component';
+import { SalaryCalculatorResultComponent } from './salaryCalculator/salaryCalculatorResult.component';
 
 @NgModule({
   declarations: [
     AppComponent
     , GreeterComponent
     , SalaryCalculatorComponent
+    , SalaryCalculatorResultComponent
   ],
   imports: [
     BrowserModule,

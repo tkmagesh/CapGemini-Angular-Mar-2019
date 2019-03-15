@@ -20,17 +20,5 @@
 	<div class="field">
 		<input type="button" value="Calculate" (click)="model.calculate()">
 	</div>
-	<div class="field">
-		<table>
-			<tbody>
-				<tr>
-					<td id="tdBasic">{{model.basic}}</td>
-					<td id="tdHra">{{model.hra}}</td>
-					<td id="tdDa">{{model.da}}</td>
-					<td id="tdTax">{{model.tax}}</td>
-					<td id="tdSalary">{{model.salary}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+	<app-salary-calculator-result [data]="model"></app-salary-calculator-result>
 </section>
