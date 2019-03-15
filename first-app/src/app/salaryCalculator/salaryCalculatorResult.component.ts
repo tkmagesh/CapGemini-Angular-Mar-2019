@@ -13,7 +13,7 @@ import { Component, Input } from '@angular/core';
 						<td id="tdDa">{{data.da}}</td>
 						<td id="tdTax">{{data.tax}}</td>
 						<td id="tdSalary" [ngClass]="{poorSalary : data.basic < 10000, goodSalary : data.basic >= 10000 }">
-							{{data.salary}}
+							{{data.salary | currency:'INR'}}
 						</td>
 					</tr>
 				</tbody>

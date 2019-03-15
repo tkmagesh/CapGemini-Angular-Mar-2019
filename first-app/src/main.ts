@@ -6,7 +6,9 @@ import { environment } from './environments/environment';
 
 import calc from './calculator';
 
-console.log(calc);
+calc.add(100,200);
+
+console.log(`calc.result = ${calc.result}`);
 
 if (environment.production) {
   enableProdMode();
