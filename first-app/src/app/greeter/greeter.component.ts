@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class GreeterComponent{
 
+	greetMessage : string = '[Default greet message]';
+
+	onGreetClick(userName : string){
+		this.greetMessage = `Hi ${userName}, Have a nice day!`;
+	}
+
 }
