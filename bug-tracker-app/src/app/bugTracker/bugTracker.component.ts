@@ -16,6 +16,8 @@ export class BugTrackerComponent{
 	bugSortBy : string = 'name';
 	bugSortDesc : boolean = false;
 
+	newBugName : string = '';
+
 	constructor(private bugOperations : BugOperationsService){
 		this.bugs.push(this.bugOperations.createNew('Server communication failure'));
 		this.bugs.push(this.bugOperations.createNew('User actions not recognized'));
@@ -23,9 +25,10 @@ export class BugTrackerComponent{
 		this.bugs.push(this.bugOperations.createNew('Data integrity checks failed'));
 	}
 
-	onAddNewClick(bugName : string){
-		let newBug : Bug = this.bugOperations.createNew(bugName);
-		this.bugs.push(newBug);
+	onAddNewClick(){
+		let newBug : Bug = this.bugOperations.createNew(this.newBugName);
+		//this.bugs.push(newBug);
+		this.bugs = [...this.bugs, newBug];
 	}
 
 	onBugNameClick(bug : Bug){
