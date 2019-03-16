@@ -41,6 +41,7 @@ export class BugTrackerComponent{
 	}
 
 	getClosedCount(){
+		console.log('getClosedCount triggered');
 		return this.bugs.reduce((result, bug) => bug.isClosed ? ++result : result, 0);
 	}
 }

@@ -6,6 +6,7 @@ import { BugTrackerComponent } from './bugTracker/bugTracker.component';
 
 import { BugOperationsService} from './bugTracker/services/bugOperations.service';
 
+import { ClosedCountPipe } from './bugTracker/pipes/clsoedCount.pipe';
 import { TrimTextPipe } from './bugTracker/pipes/trimText.pipe';
 import { SortPipe } from './bugTracker/pipes/sort.pipe';
 
@@ -13,6 +14,7 @@ import { SortPipe } from './bugTracker/pipes/sort.pipe';
   declarations: [
     AppComponent
     , BugTrackerComponent
+    , ClosedCountPipe
     , TrimTextPipe
     , SortPipe
   ],
