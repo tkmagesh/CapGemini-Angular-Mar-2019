@@ -22,7 +22,7 @@
 			<li *ngFor="let bug of bugs">
 				<span class="bugname" (click)="onBugNameClick(bug)" 
 					[ngClass]="{closed : bug.isClosed}">
-					{{bug | json}}
+					{{bug.name | trimText:40}}
 				</span>
 				<div class="datetime">[Created At]</div>
 			</li>
