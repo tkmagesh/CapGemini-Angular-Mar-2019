@@ -70,4 +70,20 @@
 
 	window['addAsyncPromise'] = addAsyncPromise;
 
+	/*function addAsyncPromiseClient(x,y){
+		console.log(`[@Client] triggering addAsyncPromose`);
+		addAsyncPromise(x,y)
+			.then(result => {
+				console.log(`[@Client result = ${result}`);
+			});
+	}*/
+
+	async function addAsyncPromiseClient(x,y){
+		console.log(`[@Client] triggering addAsyncPromose`);
+		var result = await addAsyncPromise(x,y);
+		console.log(`[@Client result = ${result}`);
+	}
+
+	window['addAsyncPromiseClient'] = addAsyncPromiseClient;
+
 })();

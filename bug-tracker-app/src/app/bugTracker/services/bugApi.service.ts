@@ -6,27 +6,27 @@ export class BugApiService{
 
 	private serviceEndPoint = 'http://localhost:3000/bugs';
 
-	getAll() : Promise<Bug[]> {
-		return axios
+	async getAll() : Promise<Bug[]> {
+		/*return axios
 			.get<Bug[]>(this.serviceEndPoint)
-			.then(response => response.data);
+			.then(response => response.data);*/
+
+		let response = await axios.get(this.serviceEndPoint);
+		return response.data;
 	}
 
-	save(bugData : Bug) : Promise<Bug> {
+	async save(bugData : Bug) : Promise<Bug> {
 		if (bugData.id === 0){
-			return axios
-				.post(this.serviceEndPoint, bugData)
-				.then(response => response.data);
+			let response = await axios.post(this.serviceEndPoint, bugData);
+			return response.data;
 		} else {
-			return axios
-				.put(`${this.serviceEndPoint}/${bugData.id}`, bugData)
-				.then(response => response.data);
+			let response = await axios.put(`${this.serviceEndPoint}/${bugData.id}`, bugData);
+			return response.data;
 		}
 	}
 
-	remove(bug : Bug) : Promise<any>{
-		return axios
-				.delete(`${this.serviceEndPoint}/${bug.id}`)
-				.then(response => response.data);
+	async remove(bug : Bug) : Promise<any>{
+		let response = await axios.delete(`${this.serviceEndPoint}/${bug.id}`);
+		return response.data;
 	}
 }

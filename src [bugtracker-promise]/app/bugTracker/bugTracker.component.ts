@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { Bug } from './models/Bug';
 
@@ -13,7 +13,7 @@ import axios from 'axios';
 	styleUrls : ['bugTracker.component.css'],
 	encapsulation : ViewEncapsulation.None
 })
-export class BugTrackerComponent implements OnInit{
+export class BugTrackerComponent{
 	//bugs : Bug[] = [];
 
 	bugs : Array<Bug> = new Array<Bug>();
@@ -31,30 +31,30 @@ export class BugTrackerComponent implements OnInit{
 			.then(response => response.data)
 			.then(data => this.bugs = data);*/
 
-		
-	}
-
-	async ngOnInit(){
-		this.bugs = await this.bugOperations.getAll();
+		this.bugOperations
+			.getAll()
+			.then(bugs => this.bugs = bugs);
 	}
 
 	onNewBugAdded(newBug : Bug){
 		this.bugs = [...this.bugs, newBug];
 	}
 
-	async onBugNameClick(bugToToggle : Bug){
-		let toggledBug = await this.bugOperations.toggle(bugToToggle);
-		this.bugs = this.bugs.map(bug => bug === bugToToggle ? toggledBug : bug);
+	onBugNameClick(bugToToggle : Bug){
+		this.bugOperations
+			.toggle(bugToToggle)
+			.then(toggledBug => this.bugs = this.bugs.map(bug => bug === bugToToggle ? toggledBug : bug));
 		
 	}
 
 	onRemoveClosedClick(){
 		this.bugs
 			.filter(bug => bug.isClosed)
-			.forEach(async closedBug => {
-				await this.bugOperations.remove(closedBug)
-				this.bugs = this.bugs.filter(bug => bug !== closedBug);
-			});
+			.forEach(closedBug => {
+				this.bugOperations
+					.remove(closedBug)
+					.then(() => this.bugs = this.bugs.filter(bug => bug !== closedBug));
+			})
 	}
 
 	
