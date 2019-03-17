@@ -2,35 +2,38 @@ import { Injectable } from '@angular/core';
 
 import { Bug } from '../models/Bug';
 import { BugStorageService } from './bugStorage.service';
+import { BugApiService } from './bugApi.service';
 
 @Injectable()
 export class BugOperationsService{
 
-	constructor(private bugStorage : BugStorageService){
+	constructor(private bugStorage : BugStorageService,
+		private bugApi : BugApiService){
 
 	}
-	createNew(bugName : string) : Bug {
+	createNew(bugName : string) : Promise<Bug> {
 		let newBug : Bug = {
 			id : 0,
 			name : bugName,
 			isClosed : false,
 			createdAt : new Date()
 		};
-		this.bugStorage.save(newBug);
-		return newBug;
+		return this.bugApi
+			.save(newBug);
 	}
 
-	toggle(bugToToggle: Bug) : Bug{
+	toggle(bugToToggle: Bug) : Promise<Bug>{
 		let toggledBug = { ...bugToToggle, isClosed : !bugToToggle.isClosed};
-		this.bugStorage.save(toggledBug);
-		return toggledBug;
+		return this.bugApi
+			.save(toggledBug);
 	}
 
-	getAll() : Bug[]{
-		return this.bugStorage.getAll();
+	getAll() : Promise<Bug[]>{
+		return this.bugApi.getAll();
 	}
 
-	remove(bug : Bug) : void{
-		this.bugStorage.remove(bug);
+	remove(bug : Bug) : Promise<any>{
+		return this.bugApi
+			.remove(bug);
 	}
 }

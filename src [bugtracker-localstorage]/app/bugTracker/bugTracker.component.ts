@@ -4,9 +4,6 @@ import { Bug } from './models/Bug';
 
 import { BugOperationsService}  from './services/bugOperations.service';
 
-import axios from 'axios';
-
-
 @Component({
 	selector : 'app-bug-tracker',
 	templateUrl : 'bugTracker.component.html',
@@ -21,19 +18,11 @@ export class BugTrackerComponent{
 	bugSortBy : string = 'name';
 	bugSortDesc : boolean = false;
 
+	
+
 	constructor(private bugOperations : BugOperationsService){
-		/*var p1 = axios.get('http://localhost:3000/bugs');
-		var p2 = p1.then(response => response.data);
-		p2.then(data => this.bugs = data);*/
-
-		/*axios
-			.get('http://localhost:3000/bugs')
-			.then(response => response.data)
-			.then(data => this.bugs = data);*/
-
-		this.bugOperations
-			.getAll()
-			.then(bugs => this.bugs = bugs);
+		//Fix this
+		this.bugs = this.bugOperations.getAll();
 	}
 
 	onNewBugAdded(newBug : Bug){
@@ -41,21 +30,20 @@ export class BugTrackerComponent{
 	}
 
 	onBugNameClick(bugToToggle : Bug){
-		this.bugOperations
-			.toggle(bugToToggle)
-			.then(toggledBug => this.bugs = this.bugs.map(bug => bug === bugToToggle ? toggledBug : bug));
-		
+		let toggledBug = this.bugOperations.toggle(bugToToggle);
+		this.bugs = this.bugs.map(bug => bug === bugToToggle ? toggledBug : bug);
 	}
 
 	onRemoveClosedClick(){
 		this.bugs
 			.filter(bug => bug.isClosed)
-			.forEach(closedBug => {
-				this.bugOperations
-					.remove(closedBug)
-					.then(() => this.bugs = this.bugs.filter(bug => bug !== closedBug));
-			})
+			.forEach(closedBug => this.bugOperations.remove(closedBug));
+			
+		this.bugs = this.bugs.filter(bug => !bug.isClosed);
 	}
 
-	
+	getClosedCount(){
+		console.log('getClosedCount triggered');
+		return this.bugs.reduce((result, bug) => bug.isClosed ? ++result : result, 0);
+	}
 }
