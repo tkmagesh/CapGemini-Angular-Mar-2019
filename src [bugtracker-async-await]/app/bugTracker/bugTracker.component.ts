@@ -4,7 +4,8 @@ import { Bug } from './models/Bug';
 
 import { BugOperationsService}  from './services/bugOperations.service';
 
-import axios from 'axios';
+
+
 
 @Component({
 	selector : 'app-bug-tracker',
@@ -21,13 +22,20 @@ export class BugTrackerComponent implements OnInit{
 	bugSortDesc : boolean = false;
 
 	constructor(private bugOperations : BugOperationsService){
+		/*var p1 = axios.get('http://localhost:3000/bugs');
+		var p2 = p1.then(response => response.data);
+		p2.then(data => this.bugs = data);*/
+
+		/*axios
+			.get('http://localhost:3000/bugs')
+			.then(response => response.data)
+			.then(data => this.bugs = data);*/
+
 		
 	}
 
 	async ngOnInit(){
-		this.bugOperations
-			.getAll()
-			.subscribe(bugs => this.bugs = bugs);
+		this.bugs = await this.bugOperations.getAll();
 	}
 
 	onNewBugAdded(newBug : Bug){
@@ -35,18 +43,17 @@ export class BugTrackerComponent implements OnInit{
 	}
 
 	async onBugNameClick(bugToToggle : Bug){
-		this.bugOperations
-			.toggle(bugToToggle)
-			.subscribe(toggledBug => this.bugs = this.bugs.map(bug => bug === bugToToggle ? toggledBug : bug));
+		let toggledBug = await this.bugOperations.toggle(bugToToggle);
+		this.bugs = this.bugs.map(bug => bug === bugToToggle ? toggledBug : bug);
+		
 	}
 
 	onRemoveClosedClick(){
 		this.bugs
 			.filter(bug => bug.isClosed)
-			.forEach( closedBug => {
-				this.bugOperations
-					.remove(closedBug)
-					.subscribe(() => this.bugs = this.bugs.filter(bug => bug !== closedBug));
+			.forEach(async closedBug => {
+				await this.bugOperations.remove(closedBug)
+				this.bugs = this.bugs.filter(bug => bug !== closedBug);
 			});
 	}
 

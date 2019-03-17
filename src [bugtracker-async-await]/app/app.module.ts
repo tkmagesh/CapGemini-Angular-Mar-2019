@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { UtilsModule } from './utils/utils.module';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BugTrackerComponent } from './bugTracker/bugTracker.component';
@@ -26,7 +25,6 @@ import { ClosedCountPipe } from './bugTracker/pipes/clsoedCount.pipe';
   imports: [
     BrowserModule
     , UtilsModule
-    , HttpClientModule
   ],
   providers: [
   	BugOperationsService
