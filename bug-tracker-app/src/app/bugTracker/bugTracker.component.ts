@@ -11,21 +11,21 @@ import { BugOperationsService}  from './services/bugOperations.service';
 	encapsulation : ViewEncapsulation.None
 })
 export class BugTrackerComponent{
-	bugs : Bug[] = [];
+	//bugs : Bug[] = [];
+
+	bugs : Array<Bug> = new Array<Bug>();
 
 	bugSortBy : string = 'name';
 	bugSortDesc : boolean = false;
 
-	newBugName : string = '';
+	
 
 	constructor(private bugOperations : BugOperationsService){
 		//Fix this
 		this.bugs = this.bugOperations.getAll();
 	}
 
-	onAddNewClick(){
-		let newBug : Bug = this.bugOperations.createNew(this.newBugName);
-		//this.bugs.push(newBug);
+	onNewBugAdded(newBug : Bug){
 		this.bugs = [...this.bugs, newBug];
 	}
 
