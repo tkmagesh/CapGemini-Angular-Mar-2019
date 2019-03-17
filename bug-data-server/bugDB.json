@@ -1,0 +1,42 @@
+{
+  "bugs": [
+    {
+      "id": 1,
+      "name": "Data integrity checks failed",
+      "isClosed": false,
+      "createdAt": "2018-10-18T09:38:38.876Z",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+    },
+    {
+      "id": 2,
+      "name": "Server communication failure",
+      "isClosed": false,
+      "createdAt": "2019-02-07T05:15:27.417Z",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+    },
+    {
+      "id": 3,
+      "name": "sadgsdgfdsg",
+      "isClosed": false,
+      "createdAt": "2019-02-27T11:31:31.190Z",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+    },
+    {
+      "id": 4,
+      "name": "asfsafdasfdas",
+      "isClosed": false,
+      "createdAt": "2019-02-27T11:41:22.495Z",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Bug Tracker"
+    },
+    {
+      "id": 2,
+      "name": "Payroll Master"
+    }
+  ]
+}
